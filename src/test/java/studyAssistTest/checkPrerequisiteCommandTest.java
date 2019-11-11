@@ -1,4 +1,5 @@
 //@@author mononokehime14
+
 package studyAssistTest;
 import gazeeebo.commands.studyassist.CheckPrerequisiteCommand;
 import gazeeebo.exception.DukeException;
@@ -31,15 +32,17 @@ public class checkPrerequisiteCommandTest {
     @Test
     void checkPrerequisite_wrongModuleException(){
         Storage storage = new Storage();
-        Ui ui =new Ui();
+        Ui ui = new Ui();
         StudyAssistPageStorage studyAssistPageStorage = new StudyAssistPageStorage();
         ui.fullCommand = "prerequisite CS2";
         try {
             new CheckPrerequisiteCommand().execute(ui,studyAssistPageStorage);
         }catch (DukeException | IOException e){
-            assertEquals("We currently do not support this module",e.getMessage());
+            assertEquals("We currently "
+                    + "do not support this module",e.getMessage());
         }
     }
+
     @Test
     void checkPrerequisiteTest(){
         Storage storage = new Storage();

@@ -1,4 +1,5 @@
 //@@author mononokehime14
+
 package studyAssistTest;
 
 import gazeeebo.ui.Ui;
@@ -43,7 +44,8 @@ class deleteModuleCommandTest {
         oldStudyPlan.push(studyPlan.StudyPlan);
         ui.fullCommand = "delete";
         try {
-            new DeleteModuleCommand().execute(studyPlan,studyAssistPageStorage,ui,oldStudyPlan);
+            new DeleteModuleCommand()
+                    .execute(studyPlan,studyAssistPageStorage,ui,oldStudyPlan);
         } catch (DukeException e) {
             assertEquals("Please follow the correct input format~",e.getMessage());
         }
@@ -59,7 +61,8 @@ class deleteModuleCommandTest {
         oldStudyPlan.push(studyPlan.StudyPlan);
         ui.fullCommand = "delete CD1234 from 5";
         try {
-            new DeleteModuleCommand().execute(studyPlan,studyAssistPageStorage,ui,oldStudyPlan);
+            new DeleteModuleCommand()
+                    .execute(studyPlan,studyAssistPageStorage,ui,oldStudyPlan);
         } catch (DukeException e) {
             assertEquals("We currently do not have this module.",e.getMessage());
         }
@@ -75,7 +78,8 @@ class deleteModuleCommandTest {
         oldStudyPlan.push(studyPlan.StudyPlan);
         ui.fullCommand = "delete CS2040C from 9";
         try {
-            new DeleteModuleCommand().execute(studyPlan,studyAssistPageStorage,ui,oldStudyPlan);
+            new DeleteModuleCommand()
+                    .execute(studyPlan,studyAssistPageStorage,ui,oldStudyPlan);
         } catch (DukeException | IOException e) {
             assertEquals("Please input correct Semester number.",e.getMessage());
         }
@@ -91,7 +95,8 @@ class deleteModuleCommandTest {
         oldStudyPlan.push(studyPlan.StudyPlan);
         ui.fullCommand = "delete CS2040C from";
         try {
-            new DeleteModuleCommand().execute(studyPlan,studyAssistPageStorage,ui,oldStudyPlan);
+            new DeleteModuleCommand()
+                    .execute(studyPlan,studyAssistPageStorage,ui,oldStudyPlan);
         } catch (DukeException | IOException e) {
             assertEquals("Please follow the correct input format~",e.getMessage());
         }
@@ -107,9 +112,11 @@ class deleteModuleCommandTest {
         oldStudyPlan.push(studyPlan.StudyPlan);
         ui.fullCommand = "delete CS3230 sem 5";
         try {
-            new DeleteModuleCommand().execute(studyPlan,studyAssistPageStorage,ui,oldStudyPlan);
+            new DeleteModuleCommand()
+                    .execute(studyPlan,studyAssistPageStorage,ui,oldStudyPlan);
         } catch (DukeException | IOException e) {
-            assertEquals("This module is not inside the study plan",e.getMessage());
+            assertEquals("This module is"
+                    + " not inside the study plan",e.getMessage());
         }
     }
 
@@ -134,15 +141,19 @@ class deleteModuleCommandTest {
         }
         if (!flag) {
             try {
-                new DeleteModuleCommand().execute(studyPlan, studyAssistPageStorage, ui,oldStudyPlan);
+                new DeleteModuleCommand()
+                        .execute(studyPlan, studyAssistPageStorage, ui,oldStudyPlan);
             } catch (DukeException | IOException e) {
-                assertEquals("This module is not inside the study plan", e.getMessage());
+                assertEquals("This module is "
+                        + "not inside the study plan", e.getMessage());
             }
         } else if (flag && semester_number != semester) {
             try {
-                new DeleteModuleCommand().execute(studyPlan, studyAssistPageStorage, ui, oldStudyPlan);
+                new DeleteModuleCommand()
+                        .execute(studyPlan, studyAssistPageStorage, ui, oldStudyPlan);
             } catch (DukeException | IOException e) {
-                assertEquals("This module is not in Sem " + (semester + 1) + " but inside Sem "
+                assertEquals("This module is not in Sem "
+                        + (semester + 1) + " but inside Sem "
                         + (semester_number + 1), e.getMessage());
             }
 
@@ -150,7 +161,9 @@ class deleteModuleCommandTest {
             try {
                 new DeleteModuleCommand().execute(studyPlan, studyAssistPageStorage, ui,oldStudyPlan);
             } catch (DukeException | IOException e) {
-                assertEquals("This module " + moduleCode + " has been successfully deleted from Sem" + 5
+                assertEquals("This module "
+                        + moduleCode + " has been successfully deleted from Sem"
+                        + 5
                         + ".", e.getMessage());
             }
         }

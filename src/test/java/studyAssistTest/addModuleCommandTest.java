@@ -1,4 +1,5 @@
 //@@author mononokehime14
+
 package studyAssistTest;
 
 import gazeeebo.commands.studyassist.StudyPlannerCommand;
@@ -81,6 +82,7 @@ public class addModuleCommandTest {
             assertEquals("Please input correct Semester number.",e.getMessage());
         }
     }
+
     @Test
     void addModule_wrongFormatException() throws IOException {
         Storage storage = new Storage();
@@ -97,6 +99,7 @@ public class addModuleCommandTest {
             assertEquals("Please follow the correct input format~",e.getMessage());
         }
     }
+
     @Test
     void addModule_duplicatedModuleException() throws IOException {
         Storage storage = new Storage();
@@ -113,6 +116,7 @@ public class addModuleCommandTest {
             assertEquals("This module is already inside the study plan",e.getMessage());
         }
     }
+
     @Test
     void addModuleTest() throws IOException {
         Storage storage = new Storage();
@@ -124,22 +128,28 @@ public class addModuleCommandTest {
         ui.fullCommand = "add CS2040C sem 5";
         String ModuleCode = "CS2040C";
         boolean flag = false;
-        for(int i=0;i<StudyPlan.StudyPlan.size()&& !flag;i++){
-            if(StudyPlan.StudyPlan.get(i).contains(ModuleCode)) flag = true;
+        for (int i = 0;i < StudyPlan.StudyPlan.size() && !flag;i++) {
+            if (StudyPlan.StudyPlan.get(i).contains(ModuleCode)) {
+                flag = true;
+            }
         }
         if(flag){
             try {
-                new AddModuleCommand().execute(StudyPlan, studyAssistPageStorage, ui, oldStudyPlan);
+                new AddModuleCommand()
+                        .execute(StudyPlan, studyAssistPageStorage, ui, oldStudyPlan);
 //            fail();
             } catch (DukeException | IOException e) {
-                assertEquals("This module is already inside the study plan", e.getMessage());
+                assertEquals("This module is already "
+                        + "inside the study plan", e.getMessage());
             }
         }else {
             try {
                 new AddModuleCommand().execute(StudyPlan, studyAssistPageStorage, ui, oldStudyPlan);
 //            fail();
             } catch (DukeException | IOException e) {
-                assertEquals("This module " + ModuleCode + " has been successfully added to Sem" + 5+".", e.getMessage());
+                assertEquals("This module "
+                        + ModuleCode + " has been successfully added to Sem"
+                        + 5 + ".", e.getMessage());
             }
         }
     }
